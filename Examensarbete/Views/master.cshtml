@@ -18,7 +18,7 @@
     <div class="p-3 m-3">
         <h1>Kudoxa is the place to be</h1>
         @RenderBody()
-
+        <button onclick="GetWeather()">Get weather</button>
     </div>
     <hr />
     <footer>
@@ -28,16 +28,22 @@
 
     <script src="~/Scripts/jquery-3.0.0.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script>
-        function GetWeather() {
-            $(document).ready(function () {
-                $.getJSON('/umbraco/api/darkskyapi/get')
-                    .done(function (data) {
-                        console.table(data);
-                    });
+<script>
+    $(document).ready(function () {
+        // Gets weather when page loads
+        $.getJSON('/umbraco/api/darkskyapi/get')
+            .done(function (data) {
+                console.table(data);
             });
-        }
-    </script>
+
+        // Updates weather every hour 
+        setInterval(function () {$.getJSON('/umbraco/api/darkskyapi/get')
+            .done(function (data) {
+                console.table(data);
+            }); }, 36000);
+
+    });
+</script>
 
 </body>
 </html>
