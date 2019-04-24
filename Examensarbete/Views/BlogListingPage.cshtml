@@ -1,0 +1,33 @@
+﻿
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.BlogListingPage>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "master.cshtml";
+}
+
+@{
+    var selection = Umbraco.Content(1075)
+        .Children()
+        .Where(x => x.IsVisible());
+}
+
+
+    <div class="row">
+        <div class="col-lg-4 p-2">
+            <ul>
+                @foreach (var item in selection)
+                {
+                    <li>
+                        <a href="@item.Url">@item.Name</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-lg-8 p-2">
+            @Html.Action("Index", "BlogPostSurface")
+        </div>
+    </div>
+
+
+
+

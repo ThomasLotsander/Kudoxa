@@ -1,0 +1,42 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Examensarbete.Models.BlogPost>
+
+@using (Html.BeginUmbracoForm("Post", "BlogPostSurface", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.ValidationSummary()
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-3">
+            @Html.LabelFor(m => m.Subject)
+        </div>
+        <div class="col-lg-9">
+            @Html.TextBoxFor(m => m.Subject)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-3">
+            @Html.LabelFor(m => m.Headline)
+        </div>
+        <div class="col-lg-9">
+            @Html.TextBoxFor(m => m.Headline)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-3">
+            @Html.LabelFor(m => m.Message)
+        </div>
+        <div class="col-lg-9">
+            @Html.TextAreaFor(m => m.Message)
+        </div>
+    </div>
+
+   
+
+   
+    <input type="submit" class="btn btn-primary" value="Skicka" />
+}
