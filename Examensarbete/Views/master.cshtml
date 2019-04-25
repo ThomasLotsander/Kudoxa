@@ -15,11 +15,11 @@
 </head>
 <body>
 
-@{
-	var selection = Umbraco.ContentAtRoot().FirstOrDefault()
-    .Children()
-    .Where(x => x.IsVisible());
-}
+    @{
+        var selection = Umbraco.ContentAtRoot().FirstOrDefault()
+        .Children()
+        .Where(x => x.IsVisible());
+    }
     <div class="navbar navbar-expand-lg bg-light">
         <ul class="navbar-nav">
             <a class="navbar-brand" href="/">Kudoxa</a>
@@ -38,30 +38,35 @@
             @RenderBody()
         </div>
     </div>
-    <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
+  
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
 
 
-    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Gets weather when page loads
-        $.getJSON('/umbraco/api/darkskyapi/get')
-            .done(function (data) {
-                console.table(data);
+        <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Gets weather when page loads
+                $.getJSON('/umbraco/api/darkskyapi/get')
+                    .done(function (data) {
+                        console.table(data);
+                        console.table("mep");
+                    });
+
+                // Updates weather every hour
+                setInterval(function () {
+                    $.getJSON('/umbraco/api/darkskyapi/get')
+                    .done(function (data) {
+                        console.table(data);
+                        console.table("varje timme?");
+                    });
+                }, 36000);
+
             });
+        </script>
 
-        // Updates weather every hour 
-        setInterval(function () {$.getJSON('/umbraco/api/darkskyapi/get')
-            .done(function (data) {
-                console.table(data);
-            }); }, 36000);
-
-    });
-</script>
-
-</body>
+    </body>
 </html>

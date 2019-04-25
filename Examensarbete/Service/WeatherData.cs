@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using System.Web;
 using Examensarbete.Models.ApiModels.DarkskyModels;
+using Examensarbete.Models.ViewModels;
 
 namespace Examensarbete.Service
 {
@@ -39,6 +40,27 @@ namespace Examensarbete.Service
                 }
 
             }
+        }
+
+        public CurrentWeatherViewModel GetCurrentWeatherViewModel(RootObject model)
+        {
+            var viewModel = new CurrentWeatherViewModel();
+            viewModel.WindBearing = GetWindBearing(model.currently.windBearing);
+
+            viewModel.ApparentTemperature = model.currently.apparentTemperature;
+            viewModel.Temperature = model.currently.temperature;
+            viewModel.WeatherDescription = model.currently.summary;
+            viewModel.WindGust = model.currently.windGust;
+            viewModel.WindSpeed = model.currently.windSpeed;
+
+
+            return viewModel;
+        }
+
+        private string GetWindBearing(int windBearing)
+        {
+            string[] caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
+            return caridnals[(int)Math.Round(((double)windBearing * 10 % 3600) / 225)];
         }
     }
 }

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Examensarbete.Models
+namespace Examensarbete.Models.ViewModels
 {
-    public class BlogPost
+    public class BlogPostViewModel
     {
         public int Id { get; set; }
 

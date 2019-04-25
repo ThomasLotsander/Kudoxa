@@ -6,6 +6,7 @@ using System.Web.Caching;
 using System.Web.Mvc;
 using System.Web.UI;
 using Examensarbete.Models;
+using Examensarbete.Models.ViewModels;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
@@ -25,10 +26,10 @@ namespace Examensarbete.Controller
 
         public ActionResult Index()
         {
-            return PartialView("CreateBlogpost", new BlogPost());
+            return PartialView("CreateBlogpost", new BlogPostViewModel());
         }
         [HttpPost]
-        public ActionResult Post(BlogPost model)
+        public ActionResult Post(BlogPostViewModel model)
         {
             if (!ModelState.IsValid)
                 return CurrentUmbracoPage();
@@ -39,6 +40,7 @@ namespace Examensarbete.Controller
                 var curretPageGuid = CurrentPage.Key.ToString();
                 var baseUdi = "umb://document/";
                 var contentUdi = baseUdi + curretPageGuid;
+                // Kan vara strul med SSL (Https / http)
                 var result = _contentService.CreateContent("My content node", Udi.Parse(contentUdi), "contentPage");
                 Services.ContentService.SaveAndPublish(result);
 
