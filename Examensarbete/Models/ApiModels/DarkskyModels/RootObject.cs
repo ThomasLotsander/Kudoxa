@@ -12,6 +12,6 @@ namespace Examensarbete.Models.ApiModels.DarkskyModels
         public Daily daily { get; set; }
         public List<Alert> alerts { get; set; }
         public Flags flags { get; set; }
-        public int offset { get; set; }
+        public double offset { get; set; }
     }
 }

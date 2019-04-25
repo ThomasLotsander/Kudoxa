@@ -45,7 +45,7 @@ namespace Examensarbete.Service
         public CurrentWeatherViewModel GetCurrentWeatherViewModel(RootObject model)
         {
             var viewModel = new CurrentWeatherViewModel();
-            viewModel.WindBearing = GetWindBearing(model.currently.windBearing);
+            viewModel.WindBearing = GetWindBearing((int)model.currently.windBearing);
 
             viewModel.ApparentTemperature = model.currently.apparentTemperature;
             viewModel.Temperature = model.currently.temperature;
