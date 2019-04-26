@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Script.Serialization;
 using Examensarbete.Models.ApiModels.DarkskyModels;
 using Examensarbete.Models.ViewModels;
 using Examensarbete.Service;
@@ -19,6 +20,8 @@ namespace Examensarbete.Controller.ApiController
         // GET: DarkskyApi
         public async Task<string> Get()
         {
+            //return
+            //    "{\"ApparentTemperature\":9,\"WeatherDescription\":\"Klart\",\"Temperature\":8.23,\"WindBearing\":\"ESE\",\"WindGust\":6.64,\"WindSpeed\":4.55,\"Icon\":\"/Static/Images/DarkskyApi/clear-day.svg\"}";
             WeatherData data = new WeatherData();
             var result = await data.GetTodaysWeather();
 
@@ -26,23 +29,17 @@ namespace Examensarbete.Controller.ApiController
 
             try
             {
-                using (MemoryStream ms = new MemoryStream())
-                {
 
-                    // Serializer the User object to the stream.  
-                    DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(CurrentWeatherViewModel));
-                    ser.WriteObject(ms, model);
-                    byte[] json = ms.ToArray();
-                    var jsonString = Encoding.UTF8.GetString(json, 0, json.Length);
-                    return jsonString;
-                }
+                var jsonObject = new JavaScriptSerializer().Serialize(model);
+                return jsonObject;
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-            
+
 
         }
     }

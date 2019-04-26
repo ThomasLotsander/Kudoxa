@@ -19,5 +19,10 @@ namespace Examensarbete.Models.ViewModels
 
         public double WindSpeed { get; set; }
 
+        public string Icon { get; set; }
+
+        public DateTime TimeOfDay { get; set; }
+        
+
     }
 }

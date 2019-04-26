@@ -1,0 +1,12 @@
+﻿#weatherIcon {
+    height: 2rem;
+}
+
+#weatherGadget {
+    width: 10rem;
+    margin-right: 2rem;
+}
+
+#weatherToggleBtn {
+    width: inherit;
+}

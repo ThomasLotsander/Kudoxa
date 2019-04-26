@@ -461,6 +461,11 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Static\Css\Main.css" />
+    <Content Include="Static\Css\WeatherApp.css" />
+    <Content Include="Static\Images\DarkskyApi\clear-day.svg" />
+    <Content Include="Static\Images\DarkskyApi\clear-night.svg" />
+    <Content Include="Static\Images\DarkskyApi\cloudy.svg" />
     <Content Include="Static\Images\DarkskyApi\Cloud\Cloud-Drizzle-Moon.svg" />
     <Content Include="Static\Images\DarkskyApi\Cloud\Cloud-Drizzle-Sun-Alt.svg" />
     <Content Include="Static\Images\DarkskyApi\Cloud\Cloud-Drizzle-Sun.svg" />
@@ -505,6 +510,7 @@
     <Content Include="Static\Images\DarkskyApi\Compass\Compass-West.svg" />
     <Content Include="Static\Images\DarkskyApi\Degrees\Degrees-Celcius.svg" />
     <Content Include="Static\Images\DarkskyApi\Degrees\Degrees-Fahrenheit.svg" />
+    <Content Include="Static\Images\DarkskyApi\fog.svg" />
     <Content Include="Static\Images\DarkskyApi\Moon\Moon-First-Quarter.svg" />
     <Content Include="Static\Images\DarkskyApi\Moon\Moon-Full.svg" />
     <Content Include="Static\Images\DarkskyApi\Moon\Moon-Last-Quarter.svg" />
@@ -514,6 +520,11 @@
     <Content Include="Static\Images\DarkskyApi\Moon\Moon-Waxing-Crescent.svg" />
     <Content Include="Static\Images\DarkskyApi\Moon\Moon-Waxing-Gibbous.svg" />
     <Content Include="Static\Images\DarkskyApi\Moon\Moon.svg" />
+    <Content Include="Static\Images\DarkskyApi\partly-cloudy-day.svg" />
+    <Content Include="Static\Images\DarkskyApi\partly-cloudy-night.svg" />
+    <Content Include="Static\Images\DarkskyApi\rain.svg" />
+    <Content Include="Static\Images\DarkskyApi\sleet.svg" />
+    <Content Include="Static\Images\DarkskyApi\snow.svg" />
     <Content Include="Static\Images\DarkskyApi\Sun\Sun-Low.svg" />
     <Content Include="Static\Images\DarkskyApi\Sun\Sun-Lower.svg" />
     <Content Include="Static\Images\DarkskyApi\Sun\Sun.svg" />
@@ -525,7 +536,9 @@
     <Content Include="Static\Images\DarkskyApi\Thermometer\Thermometer-75.svg" />
     <Content Include="Static\Images\DarkskyApi\Thermometer\Thermometer-Zero.svg" />
     <Content Include="Static\Images\DarkskyApi\Thermometer\Thermometer.svg" />
+    <Content Include="Static\Images\DarkskyApi\wind.svg" />
     <Content Include="Static\Images\DarkskyApi\Wind\Wind.svg" />
+    <Content Include="Static\Javascript\Main.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -584,9 +597,11 @@
     <Content Include="Views\ContentPage.cshtml" />
     <Content Include="Views\NavigationPage.cshtml" />
     <Content Include="Views\BlogListingPage.cshtml" />
+    <Content Include="Views\Partials\CreateBlogpost.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Partials\CreateBlogpost.cshtml" />
+    <Content Include="Views\Shared\_Navigation.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

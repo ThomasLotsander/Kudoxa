@@ -11,26 +11,13 @@
     <title>Kudoxa</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Static/Css/Main.css" rel="stylesheet" />
+    <link href="~/Static/Css/WeatherApp.css" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
 
-    @{
-        var selection = Umbraco.ContentAtRoot().FirstOrDefault()
-        .Children()
-        .Where(x => x.IsVisible());
-    }
-    <div class="navbar navbar-expand-lg bg-light">
-        <ul class="navbar-nav">
-            <a class="navbar-brand" href="/">Kudoxa</a>
-            @foreach (var item in selection)
-            {
-                <li class="nav-item">
-                    <a class="nav-link" href="@item.Url">@item.Name</a>
-                </li>
-            }
-        </ul>
-    </div>
+    @Html.Partial("_Navigation")
     <div class="container">
 
         <div class="p-3 m-3">
@@ -38,35 +25,22 @@
             @RenderBody()
         </div>
     </div>
-    
+
     <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
+
+    @Html.Partial("_Footer")
 
 
     <script src="~/Scripts/jquery-3.0.0.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Gets weather when page loads
-            $.getJSON('/umbraco/api/darkskyapi/get')
-                .done(function (data) {
-                    console.table(data);
-                    console.table("mep");
-                });
+    <script src="~/Static/Javascript/Main.js"></script>
 
-            // Updates weather every hour
-            setInterval(function () {
-                $.getJSON('/umbraco/api/darkskyapi/get')
-                    .done(function (data) {
-                        console.table(data);
-                        console.table("varje timme?");
-                    });
-            }, 36000);
-
-        });
-    </script>
+    @*
+        Dark Sky Weather API icons by Dr. Lex aka Alexander Thomas
+        http://www.dr-lex.be/software/darksky-icons.html
+        This work is licensed under a Creative Commons Attribution 3.0 Unported License.
+        http://creativecommons.org/licenses/by/3.0
+        /*@
 
 </body>
 </html>

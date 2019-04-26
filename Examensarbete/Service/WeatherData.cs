@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Caching;
 using Examensarbete.Models.ApiModels.DarkskyModels;
 using Examensarbete.Models.ViewModels;
 
@@ -44,23 +45,48 @@ namespace Examensarbete.Service
 
         public CurrentWeatherViewModel GetCurrentWeatherViewModel(RootObject model)
         {
-            var viewModel = new CurrentWeatherViewModel();
-            viewModel.WindBearing = GetWindBearing((int)model.currently.windBearing);
+            // TODO: Fix try catch / Handle error
+            try
+            {
+                var current = model.currently;
+                var viewModel = new CurrentWeatherViewModel()
+                {
+                    WindBearing = GetWindBearing((int)current.windBearing),
+                    ApparentTemperature = current.apparentTemperature,
+                    Temperature = RountTemperature(current.temperature),
+                    WeatherDescription = current.summary,
+                    WindGust = current.windGust,
+                    WindSpeed = current.windSpeed,
+                    Icon = GetIconSerachString(current.icon),
+                    TimeOfDay = new DateTime().AddSeconds(current.time)
 
-            viewModel.ApparentTemperature = model.currently.apparentTemperature;
-            viewModel.Temperature = model.currently.temperature;
-            viewModel.WeatherDescription = model.currently.summary;
-            viewModel.WindGust = model.currently.windGust;
-            viewModel.WindSpeed = model.currently.windSpeed;
+            };
 
-
-            return viewModel;
+                return viewModel;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+          
         }
 
         private string GetWindBearing(int windBearing)
         {
             string[] caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
             return caridnals[(int)Math.Round(((double)windBearing * 10 % 3600) / 225)];
+        }
+
+        private string GetIconSerachString(string icon)
+        {
+            return "/Static/Images/DarkskyApi/" + icon + ".svg";
+        }
+
+        private int RountTemperature(double temperature)
+        {
+            var temp = Math.Round(temperature);
+            return (int) temp;
         }
     }
 }
