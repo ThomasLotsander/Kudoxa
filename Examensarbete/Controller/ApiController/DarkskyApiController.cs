@@ -20,27 +20,29 @@ namespace Examensarbete.Controller.ApiController
         // GET: DarkskyApi
         public async Task<string> Get()
         {
-            //return
-            //    "{\"ApparentTemperature\":9,\"WeatherDescription\":\"Klart\",\"Temperature\":8.23,\"WindBearing\":\"ESE\",\"WindGust\":6.64,\"WindSpeed\":4.55,\"Icon\":\"/Static/Images/DarkskyApi/clear-day.svg\"}";
-            WeatherData data = new WeatherData();
-            var result = await data.GetTodaysWeather();
-
-            var model = data.GetCurrentWeatherViewModel(result);
-
             try
             {
 
+                WeatherData data = new WeatherData();
+                var result = await data.GetTodaysWeather();
+
+                WeatherInfoViewModel model = new WeatherInfoViewModel
+                {
+                    CurrentWeather = data.GetCurrentWeatherViewModel(result)
+                };
+                foreach (var date in result.daily.data)
+                {
+                    var dailyModel = data.GetDailyWeatherforecastViewModel(date);
+                    model.DailyWeatherforecasts.Add(dailyModel);
+                }
                 var jsonObject = new JavaScriptSerializer().Serialize(model);
                 return jsonObject;
-
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-
-
         }
     }
 }

@@ -7,10 +7,6 @@ namespace Examensarbete.Models.ViewModels
 {
     public class CurrentWeatherViewModel
     {
-        public double ApparentTemperature { get; set; }
-
-        public string WeatherDescription { get; set; }
-
         public double Temperature { get; set; }
 
         public string WindBearing { get; set; }
@@ -21,7 +17,7 @@ namespace Examensarbete.Models.ViewModels
 
         public string Icon { get; set; }
 
-        public DateTime TimeOfDay { get; set; }
+        public int CurrentHour { get; set; }
         
 
     }

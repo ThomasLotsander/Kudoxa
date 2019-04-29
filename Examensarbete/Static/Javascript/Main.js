@@ -4,25 +4,33 @@
         .done(function (data) {
             var obj = JSON.parse(data);
             console.log(obj);
-
-            document.getElementById("Temperature").innerText = obj.Temperature + "°";
+            var current = obj.CurrentWeather;
+            console.log(current);
+            document.getElementById("Temperature").innerText = current.Temperature + "°";
 
             var weatherIcon = document.getElementById("weatherIcon");
-            weatherIcon.src = obj.Icon;
+            weatherIcon.src = current.Icon;
             weatherIcon.alt = "weather icon";
             var weatherGadget = document.getElementById("weatherGadgetDiv");
 
             var windSpeed = document.createElement("p");
-            //var windDirection = document.createElement("p").innerHTML = obj.WindBearing;
-            //var timeOfDay = document.createElement("p").innerHTML = obj.WeatherDescription;
+            var currentHour = document.createElement("p");
+            var link = document.createElement("a");
 
-            var windSpeedText = document.createTextNode(obj.WindSpeed + "m/s " + obj.WindBearing);
+            var windSpeedText = document.createTextNode(current.WindBearing + " " + current.WindSpeed + ":m/s " + "(" + current.WindGust + ")");
             windSpeed.appendChild(windSpeedText);
 
+            var currentHourText = document.createTextNode(current.CurrentHour + ":00 ");
+            currentHour.appendChild(currentHourText);
+
+            link.href = "/vader";
+            link.innerHTML = "Se mer";
             weatherGadget.appendChild(windSpeed);
-            //weatherGadget.appendChild(windDirection);
-            //weatherGadget.appendChild(timeOfDay);
+            weatherGadget.appendChild(currentHour);
+            weatherGadget.appendChild(link);
         });
+
+
 
     // Updates weather every hour
     //setInterval(function () {
@@ -32,6 +40,6 @@
     //            console.table("varje timme?");
     //            console.table("mep: " + data.Icon);
     //        });
-    //}, 1000);
+    //}, 3600000);
 
 });

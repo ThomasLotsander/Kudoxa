@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Caching;
@@ -52,13 +53,11 @@ namespace Examensarbete.Service
                 var viewModel = new CurrentWeatherViewModel()
                 {
                     WindBearing = GetWindBearing((int)current.windBearing),
-                    ApparentTemperature = current.apparentTemperature,
-                    Temperature = RountTemperature(current.temperature),
-                    WeatherDescription = current.summary,
-                    WindGust = current.windGust,
-                    WindSpeed = current.windSpeed,
+                    Temperature = (int)Math.Round(current.temperature),
+                    WindGust = (int)Math.Round(current.windGust),
+                    WindSpeed = (int)Math.Round(current.windSpeed),
                     Icon = GetIconSerachString(current.icon),
-                    TimeOfDay = new DateTime().AddSeconds(current.time)
+                    CurrentHour = GetCurrentTime(model.offset, current.time)
 
             };
 
@@ -72,6 +71,18 @@ namespace Examensarbete.Service
           
         }
 
+        public Datum2 GetDailyWeatherforecastViewModel(Datum2 model)
+        {
+            return model;
+        }
+
+        private int GetCurrentTime(double hours, int time)
+        {
+            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+            var current = dt.AddHours(Math.Floor(hours)).AddSeconds(time);
+            return current.Hour;
+        }
+
         private string GetWindBearing(int windBearing)
         {
             string[] caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
@@ -83,10 +94,5 @@ namespace Examensarbete.Service
             return "/Static/Images/DarkskyApi/" + icon + ".svg";
         }
 
-        private int RountTemperature(double temperature)
-        {
-            var temp = Math.Round(temperature);
-            return (int) temp;
-        }
     }
 }
