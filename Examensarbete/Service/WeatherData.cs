@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Caching;
 using Examensarbete.Models.ApiModels.DarkskyModels;
 using Examensarbete.Models.ViewModels;
+using NPoco.Expressions;
 
 namespace Examensarbete.Service
 {
@@ -57,7 +58,7 @@ namespace Examensarbete.Service
                     WindGust = (int)Math.Round(current.windGust),
                     WindSpeed = (int)Math.Round(current.windSpeed),
                     Icon = GetIconSerachString(current.icon),
-                    CurrentHour = GetCurrentTime(model.offset, current.time)
+                    CurrentHour = GetCurrentTime(model.offset, current.time).Hour
 
             };
 
@@ -71,16 +72,29 @@ namespace Examensarbete.Service
           
         }
 
-        public Datum2 GetDailyWeatherforecastViewModel(Datum2 model)
+        public DailyWeatherforecastViewModel GetDailyWeatherforecastViewModel(Datum2 model)
         {
-            return model;
+            var viewModel = new DailyWeatherforecastViewModel()
+            {
+                Day = GetCurrentTime(2, (int)model.time).ToString("dddd, dd MMMM"),
+                Icon = GetIconSerachString(model.icon),
+                Summary = model.summary,
+                Sunrise = GetCurrentTime(2, (int)model.sunriseTime).ToString("HH:mm"),
+                SunSet = GetCurrentTime(2, (int)model.sunsetTime).ToString("HH:mm"),
+                TempMax = Math.Round(model.temperatureHigh),
+                TempMin = Math.Round(model.temperatureLow),
+                WindBearing = GetWindBearing((int)model.windBearing),
+                WindGust = Math.Round(model.windGust),
+                WindSpeed = Math.Round(model.windSpeed)
+            };
+            return viewModel;
         }
 
-        private int GetCurrentTime(double hours, int time)
+        private DateTime GetCurrentTime(double hours, int time)
         {
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             var current = dt.AddHours(Math.Floor(hours)).AddSeconds(time);
-            return current.Hour;
+            return current;
         }
 
         private string GetWindBearing(int windBearing)

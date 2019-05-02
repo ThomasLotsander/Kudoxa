@@ -11,7 +11,7 @@ namespace Examensarbete.Models.ViewModels
     {
         public CurrentWeatherViewModel CurrentWeather { get; set; }
 
-        public List<Datum2> DailyWeatherforecasts{ get; set; } = new List<Datum2>();
+        public List<DailyWeatherforecastViewModel> DailyWeatherforecasts{ get; set; } = new List<DailyWeatherforecastViewModel>();
 
     }
 }

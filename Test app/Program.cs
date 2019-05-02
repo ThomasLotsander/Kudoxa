@@ -11,10 +11,13 @@ namespace Test_app
     {
         static void Main(string[] args)
         {
-            
-            int time = 1556575200;
+
+            int time = 1556488800;
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             var current = dt.AddHours(2).AddSeconds(time);
+            //current.DayOfWeek
+            //    current.Month
+            //        current.Day
             Console.WriteLine(current);
         }
     }
