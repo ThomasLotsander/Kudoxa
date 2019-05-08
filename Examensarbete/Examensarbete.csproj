@@ -59,6 +59,12 @@
     <Reference Include="CSharpTest.Net.Collections, Version=14.906.1403.1082, Culture=neutral, PublicKeyToken=06aee00cce822474, processorArchitecture=MSIL">
       <HintPath>..\packages\CSharpTest.Net.Collections.14.906.1403.1082\lib\net40\CSharpTest.Net.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Examine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Examine.1.0.0\lib\net452\Examine.dll</HintPath>
     </Reference>
@@ -466,6 +472,14 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -488,6 +502,17 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -582,13 +607,30 @@
     <Content Include="Static\Images\DarkskyApi\wind.svg" />
     <Content Include="Static\Images\DarkskyApi\Wind\Wind.svg" />
     <Content Include="Static\Javascript\Main.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ApiController\DarkskyApiController.cs" />
     <Compile Include="Controller\BlogPostSurfaceController.cs" />
     <Compile Include="Controller\CalenderSurfaceController.cs" />
     <Compile Include="Controller\WeatherSurfaceController.cs" />
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ApiModels\DarkskyModels\Alert.cs" />
     <Compile Include="Models\ApiModels\DarkskyModels\Currently.cs" />
     <Compile Include="Models\ApiModels\DarkskyModels\Daily.cs" />
@@ -597,6 +639,8 @@
     <Compile Include="Models\ApiModels\DarkskyModels\Flags.cs" />
     <Compile Include="Models\ApiModels\DarkskyModels\Hourly.cs" />
     <Compile Include="Models\ApiModels\DarkskyModels\RootObject.cs" />
+    <Compile Include="Models\CalanderContext.cs" />
+    <Compile Include="Models\CalenderBoking.cs" />
     <Compile Include="Models\ViewModels\BlogPostViewModel.cs" />
     <Compile Include="Models\ViewModels\CalenderViewModel.cs" />
     <Compile Include="Models\ViewModels\CurrentWeatherViewModel.cs" />
