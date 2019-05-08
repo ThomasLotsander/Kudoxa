@@ -115,4 +115,16 @@
     //        });
     //}, 3600000);
 
+    var date_input = $('.date'); //our date input has the name "date"
+    date_input.datepicker({ 
+
+        todayHighlight: true,
+        //autoclose: true,
+        //dateFormat: 'dd/MM/yyyy',
+        startDate: '-3d'
+
+        // Options:
+        // https://bootstrap-datepicker.readthedocs.io/en/latest/
+        // http://api.jqueryui.com/datepicker/#option-dateFormat
+    })
 });
