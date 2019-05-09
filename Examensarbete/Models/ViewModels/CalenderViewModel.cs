@@ -10,6 +10,7 @@ namespace Examensarbete.Models.ViewModels
     public class CalenderViewModel
     {
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [Display(Name = "Ankomstdatum")]
         public DateTime ArrivalDate { get; set; }
 
         [Required]
@@ -17,7 +18,11 @@ namespace Examensarbete.Models.ViewModels
         [Display(Name = "Hemresa")]
         public DateTime ReturnDate { get; set; }
 
+        [Display(Name = "Antal resenärer")]
         public int NumberOfPeople { get; set; }
+
+        [Display(Name = "Namn")]
+        public string Name { get; set; }
 
     }
 }

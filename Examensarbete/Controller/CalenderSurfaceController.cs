@@ -15,6 +15,8 @@ namespace Examensarbete.Controller
         [HttpPost]
         public ActionResult BookDate(CalenderViewModel model)
         {
+            KudoxaEntities db = new KudoxaEntities();
+            var allBokings = db.CalenderBokings.ToList();
 
             if (ModelState.IsValid)
             {
@@ -26,8 +28,17 @@ namespace Examensarbete.Controller
             {
                 var currentUser = Services.UserService.GetByUsername(userTicket.Identity.GetUserName());
             }
+            CalenderBoking dataModel = new CalenderBoking()
+            {
+                ArrivalDate = model.ArrivalDate,
+                ReturnDate = model.ReturnDate,
+                Name = model.Name,
+                NumberOfPeople = model.NumberOfPeople
+            };
 
-           
+            db.CalenderBokings.Add(dataModel);
+            db.SaveChanges();
+            allBokings = db.CalenderBokings.ToList();
             // TODO: Save date in database
             return RedirectToCurrentUmbracoPage();
         }

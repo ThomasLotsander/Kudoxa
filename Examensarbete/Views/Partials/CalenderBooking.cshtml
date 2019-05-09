@@ -27,7 +27,7 @@
                 })
         </div>
     </div>
-    
+
     <div class="form-group">
         <div class="col-lg-3">
             @Html.LabelFor(m => m.ReturnDate)
@@ -45,8 +45,22 @@
                 })
 
         </div>
-       
+
     </div>
 
-    <input type="submit" class="btn btn-info" value="Spara"/>
+    <div class="form-group">
+        <div class="col-lg-3">
+            @Html.LabelFor(m => m.Name)
+        </div>
+        <div class="col-lg-9">
+            @Html.TextBoxFor(m => m.Name)
+        </div>
+        <div class="col-lg-3">
+            @Html.LabelFor(m => m.NumberOfPeople)
+        </div>
+        <div class="col-lg-9">
+            @Html.TextBoxFor(m => m.NumberOfPeople)
+        </div>
+    </div>
+    <input type="submit" class="btn btn-info" value="Spara" />
 }
