@@ -1,66 +1,109 @@
 ﻿@using System.Web.UI.WebControls
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<Examensarbete.Models.ViewModels.CalenderViewModel>
 
+<div class="row">
 
-@using (Html.BeginUmbracoForm("BookDate", "CalenderSurface", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+    <div class="col-sm-5">
+        @using (Html.BeginUmbracoForm("BookDate", "CalenderSurface", FormMethod.Post))
+        {
+            @Html.ValidationSummary("all");
+            @Html.HiddenFor(m => m.CalenderBokings, new { Value = @Model.CalenderBokings.Count })
+            @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.ValidationSummary()
+            <div class="form-group">
+                @Html.ValidationSummary()
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-3">
+                    @Html.LabelFor(m => m.ArrivalDate)
+                </div>
+                <div class="col-lg-9">
+                    @Html.EditorFor(m => m.ArrivalDate,
+                        new { htmlAttributes = new
+                        {
+                            @class = "form-control date",
+                            @id = "date",
+                            @Name = "ArrivalDate",
+                            onkeydown = "return false",
+                            onpaste = "return false"
+                        }
+                        })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-3">
+                    @Html.LabelFor(m => m.ReturnDate)
+                </div>
+                <div class="col-lg-9">
+                    @Html.EditorFor(m => m.ReturnDate,
+                        new { htmlAttributes = new
+                        {
+                            @class = "form-control date",
+                            @id = "date",
+                            @Name = "ReturnDate",
+                            onkeydown = "return false",
+                            onpaste = "return false"
+                        }
+                        })
+
+                </div>
+                <small class="form-text text-muted">@TempData["ReturnDate"]</small>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-3">
+                    @Html.LabelFor(m => m.Name)
+                </div>
+                <div class="col-lg-9">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                </div>
+                <div class="col-lg-3">
+                    @Html.LabelFor(m => m.NumberOfPeople)
+                </div>
+                <div class="col-lg-9">
+                    @Html.TextBoxFor(m => m.NumberOfPeople, new { type = "number", min = "1", @class = "form-control", onkeydown = "return false",
+                        onpaste = "return false" })
+                </div>
+            </div>
+            <input type="submit" class="btn btn-info" value="Spara" />
+
+        }
     </div>
 
-    <div class="form-group">
-        <div class="col-lg-3">
-            @Html.LabelFor(m => m.ArrivalDate)
-        </div>
-        <div class="col-lg-9">
-            @Html.EditorFor(m => m.ArrivalDate,
-                new { htmlAttributes = new
+    <div class="col-sm-7">
+        <table class="table table-dark table-active">
+            <thead>
+                <tr>
+                    <th>Namn</th>
+                    <th>Antal personer</th>
+                    <th>Ankomstdatum</th>
+                    <th>Hemresa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.CalenderBokings.Count > 0)
                 {
-                    @class = "form-control date",
-                    @id = "date",
-                    @Name = "ArrivalDate",
-                    onkeydown = "return false",
-                    onpaste = "return false"
-                }
-                })
-        </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-lg-3">
-            @Html.LabelFor(m => m.ReturnDate)
-        </div>
-        <div class="col-lg-9">
-            @Html.EditorFor(m => m.ReturnDate,
-                new { htmlAttributes = new
+                    foreach (var boking in Model.CalenderBokings)
+                    {
+                        <tr>
+                            <td>@boking.Name</td>
+                            <td>@boking.NumberOfPeople</td>
+                            <td>@boking.ArrivalDate.ToString("d")</td>
+                            <td>@boking.ReturnDate.ToString("d")</td>
+
+                        </tr>
+                    }
+                }
+                else
                 {
-                    @class = "form-control date",
-                    @id = "date",
-                    @Name = "ReturnDate",
-                    onkeydown = "return false",
-                    onpaste = "return false"
+                    <tr>
+                        <td colspan="4">Inga bokningar är gjorda.</td>
+                    </tr>
                 }
-                })
-
-        </div>
-
+            </tbody>
+        </table>
     </div>
-
-    <div class="form-group">
-        <div class="col-lg-3">
-            @Html.LabelFor(m => m.Name)
-        </div>
-        <div class="col-lg-9">
-            @Html.TextBoxFor(m => m.Name)
-        </div>
-        <div class="col-lg-3">
-            @Html.LabelFor(m => m.NumberOfPeople)
-        </div>
-        <div class="col-lg-9">
-            @Html.TextBoxFor(m => m.NumberOfPeople)
-        </div>
-    </div>
-    <input type="submit" class="btn btn-info" value="Spara" />
-}
+</div>
