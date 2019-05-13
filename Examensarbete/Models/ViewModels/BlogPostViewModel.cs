@@ -8,6 +8,7 @@ namespace Examensarbete.Models.ViewModels
 {
     public class BlogPostViewModel
     {
+       
         public int Id { get; set; }
 
         [Display(Name = "Ämne:")]
@@ -18,6 +19,10 @@ namespace Examensarbete.Models.ViewModels
 
         [Display(Name = "Meddelande:")]
         public string Message { get; set; }
+
+        public HttpPostedFileBase ImageFile { get; set; }
+        
+        
 
 
     }
