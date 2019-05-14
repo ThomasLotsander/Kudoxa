@@ -1,6 +1,70 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.BloggPage>
+@using Umbraco.Web.Composing
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
-	Layout = "master.cshtml";
+    Layout = "master.cshtml";
+
+    var createdAt = Umbraco.AssignedContentItem.CreateDate;
+    //var lastUpdateDate = Umbraco.AssignedContentItem.UpdateDate
+
+
+    var selection = Umbraco.Content(1075)
+        .Children()
+        .Where(x => x.IsVisible());
 }
-<p>Blogg</p>
+
+<div class="blogPostArea">
+    <div class="row">
+        <div class="col-lg-3">
+
+            <div class="blogImage">
+                @*@Model.Value("blogImage")*@
+                @*<img src="" alt="Här ska det vara en runt bild" />*@
+                <img src="~/Static/Images/DarkskyApi/clear-day.svg" />
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="blogHeadLine">
+                <h2>@Model.Value("headline") <span>[@Model.Value("subject")]</span></h2>
+
+            </div>
+
+            <div class="blogText">
+                @Model.Value("blogText")
+            </div>
+            @{
+                if (Model.Value<string[]>("blogpostComment").Length > 0)
+                {
+                    <ul>
+                        @foreach (var item in Model.Value<string[]>("blogpostComment"))
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                }
+            }
+
+
+            @using (Html.BeginUmbracoForm("AddComment", "BlogPostSurface", FormMethod.Post))
+            { 
+                <div class="input-group">
+                    <input class="form-control" placeholder="Skriv en kommenta..." name="Comment" />
+                    <span class="input-group-addon"> <input type="submit" class="btn btn-primary" value="skicka" /></span>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <div class="blogSubject">
+
+    </div>
+
+
+    <div class="blogCreateDate">
+        <p>Skrevs: @createdAt.ToString("dd MMMM yyyy")</p>
+    </div>
+</div>
+
+

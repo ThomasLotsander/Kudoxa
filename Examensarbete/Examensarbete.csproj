@@ -527,6 +527,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Static\Css\BlogStyles.css" />
     <Content Include="Static\Css\Main.css" />
     <Content Include="Static\Css\WeatherApp.css" />
     <Content Include="Static\Images\DarkskyApi\clear-day.svg" />

@@ -14,16 +14,18 @@
 
     <div class="row">
         <div class="col-lg-4 p-2">
-            <ul>
+            <ul class="blogPageList">
                 @foreach (var item in selection)
                 {
-                    <li>
-                        <a href="@item.Url">@item.Name</a>
-                    </li>
+                <li>
+                   
+                    <a href="@item.Url"> <img id="weatherIcon" src="~/Static/Images/DarkskyApi/clear-day.svg" /> @item.Name</a>
+                </li>
                 }
             </ul>
         </div>
         <div class="col-lg-8 p-2">
+            <strong>@TempData["PublishFaild"]</strong>
             @Html.Action("Index", "BlogPostSurface")
         </div>
     </div>

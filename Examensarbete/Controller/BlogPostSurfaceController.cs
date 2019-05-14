@@ -36,33 +36,25 @@ namespace Examensarbete.Controller
                 return CurrentUmbracoPage();
 
 
-            // Save Image
-            IMediaService mediaService = Services.MediaService;
-
-            IMedia media1 = mediaService.CreateMedia("Media File Base", 1104, "Image");
-            var media = mediaService.Save(media1);
-            media1.SetValue("umbracoFile", model.ImageFile);
-
-            
-
-
-            mediaService.Save(media1);
-
-            using (var ms = new MemoryStream())
-            {
-                ms.CopyTo(model.ImageFile.InputStream);
-
-                var buffer = ms.GetBuffer();
-               media1.SetValue("umbracoFile", buffer);
-            }
-
             try
             {
-                var curretPageGuid = CurrentPage.Key;
-                var baseUdi = "umb://document/";
-                var contentUdi = baseUdi + curretPageGuid;
-                var blogContent = _contentService.CreateContent(model.Subject, Udi.Parse(contentUdi), "bloggPage");
+                var contentUdi = "umb://document/" + CurrentPage.Key; ;
+                var blogContent = _contentService.CreateContent(model.Headline, Udi.Parse(contentUdi), "bloggPage");
                 blogContent.SetCultureName(model.Headline, "en-US");
+                blogContent.SetValue("headline", model.Headline, "en-US");
+                blogContent.SetValue("subject", model.Subject, "en-US");
+                blogContent.SetValue("blogText", model.Message, "en-US");
+
+                if (model.ImageFile != null)
+                {
+                    IMediaService mediaService = Services.MediaService;
+                    IMedia media = mediaService.CreateMedia(model.ImageFile.FileName, 1104, "Image");
+                    var resultAttempt = mediaService.Save(media);
+                    media.SetValue("umbracoFile", model.ImageFile); // Funkar inte som det ska. Kommer in en bild utan någon data
+                    mediaService.Save(media);
+                    blogContent.SetValue("blogImage", media, "en-US");
+                }
+
                 var result = _contentService.SaveAndPublish(blogContent, "en-US");
 
                 if (!result.Success)
@@ -79,8 +71,31 @@ namespace Examensarbete.Controller
                 TempData["PublishFaild"] = e.Message;
                 return RedirectToCurrentUmbracoPage();
             }
-
-
+        }
+       
+        public ActionResult AddComment(string Comment)
+        {
+            try
+            {
+                var blogPage = _contentService.GetById(CurrentPage.Id);
+                var values = blogPage.GetValue("blogpostComment", "en-US");
+                if (values == null)
+                {
+                    blogPage.SetValue("blogpostComment", Comment, "en-US");
+                }
+                else
+                {
+                    values = values.ToString() + Environment.NewLine + Comment;
+                    blogPage.SetValue("blogpostComment", values, "en-US");
+                }
+                _contentService.SaveAndPublish(blogPage, "en-Us");
+                return RedirectToCurrentUmbracoPage();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }
