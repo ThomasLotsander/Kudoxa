@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,8 +21,8 @@ namespace Examensarbete.Controller
         {
             var model = new CalenderViewModel()
             {
-                ArrivalDate = DateTime.Today,
-                ReturnDate = DateTime.Today.AddDays(1),
+                ArrivalDate = DateTime.Today.ToString("dd/MM/yyyy"),
+                ReturnDate = DateTime.Today.AddDays(1).ToString("dd/MM/yyyy"),
                 CalenderBokings = data.GetUpToDateCalenderBokings()
             };
             return PartialView("CalenderBooking", model);
@@ -30,11 +31,14 @@ namespace Examensarbete.Controller
         [HttpPost]
         public ActionResult BookDate(CalenderViewModel model)
         {
+    
             // Workarount to make ModelState work.
             ModelState.Remove("CalenderBokings");
             if (ModelState.IsValid)
             {
-                if (!calenderBusiness.ReturnDateIsLaterThenArrivalDate(model.ArrivalDate, model.ReturnDate))
+                DateTime arrivalDate = DateTime.ParseExact(model.ArrivalDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime returnDate = DateTime.ParseExact(model.ReturnDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                if (!calenderBusiness.ReturnDateIsLaterThenArrivalDate(arrivalDate, returnDate))
                 {
                     TempData["BokingMessage"] = "Du kan inte boka en hemfärd som är tidigare än utfärden.";
                     
@@ -43,8 +47,8 @@ namespace Examensarbete.Controller
                 {
                     CalenderBoking dataModel = new CalenderBoking()
                     {
-                        ArrivalDate = model.ArrivalDate,
-                        ReturnDate = model.ReturnDate,
+                        ArrivalDate = arrivalDate,
+                        ReturnDate = returnDate,
                         Name = model.Name,
                         NumberOfPeople = model.NumberOfPeople
                     };

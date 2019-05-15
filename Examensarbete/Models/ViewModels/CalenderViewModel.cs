@@ -12,12 +12,12 @@ namespace Examensarbete.Models.ViewModels
         [Required(ErrorMessage = "Vänligen ange ett datum för ankomst")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "Ankomstdatum")]
-        public DateTime ArrivalDate { get; set; }
+        public string ArrivalDate { get; set; }
 
         [Required(ErrorMessage = "Vänligen ange ett datum för hemresa")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [Display(Name = "Hemresa")]
-        public DateTime ReturnDate { get; set; }
+        public string ReturnDate { get; set; }
 
         [Required(ErrorMessage = "Vänligen välj antal resenärer")]
         [Display(Name = "Antal resenärer")]

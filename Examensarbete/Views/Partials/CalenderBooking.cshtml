@@ -26,7 +26,8 @@
                             @id = "date",
                             @Name = "ArrivalDate",
                             onkeydown = "return false",
-                            onpaste = "return false"
+                            onpaste = "return false",
+                            autocomplete = "off"
                         }
                     })
             </div>
@@ -44,7 +45,8 @@
                             @id = "date",
                             @Name = "ReturnDate",
                             onkeydown = "return false",
-                            onpaste = "return false"
+                            onpaste = "return false",
+                            autocomplete = "off"
                         }
                     })
             </div>
@@ -61,10 +63,14 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.NumberOfPeople)
                 @Html.TextBoxFor(m => m.NumberOfPeople, new
-                {
-                    type = "number", min = "1", @class = "form-control", onkeydown = "return false",
-                    onpaste = "return false"
-                })
+           {
+               type = "number",
+               min = "1",
+               @class = "form-control",
+               onkeydown = "return false",
+               onpaste = "return false",
+               autocomplete = "off"
+           })
 
                 <input type="submit" class="btn btn-info" value="Spara" />
             </div>
@@ -77,8 +83,8 @@
 <div class="row">
 
     <div class="col-sm-12">
-        <table class="table table-dark table-active">
-            <thead>
+        <table class="table table-responsive-md ">
+            <thead class="table-dark">
                 <tr>
                     <th>Namn</th>
                     <th>Antal personer</th>
@@ -96,7 +102,7 @@
                             <td>@boking.Name</td>
                             <td>@boking.NumberOfPeople</td>
                             <td>@boking.ArrivalDate.ToString("dd MMMM")</td>
-                            <td>@boking.ReturnDate.ToString("dd MMM")</td>
+                            <td>@boking.ReturnDate.ToString("dd MMMM")</td>
 
                         </tr>
                     }
