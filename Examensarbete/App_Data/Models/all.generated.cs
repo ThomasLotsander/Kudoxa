@@ -8,7 +8,7 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "7685ea757c42eb41")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "f93829479d07957")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -116,6 +116,20 @@ namespace Umbraco.Web.PublishedModels
 		{ }
 
 		// properties
+
+		///<summary>
+		/// GridArea
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
+		[ImplementPropertyType("gridArea")]
+		public Newtonsoft.Json.Linq.JToken GridArea => this.Value<Newtonsoft.Json.Linq.JToken>("gridArea");
+
+		///<summary>
+		/// Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
+		[ImplementPropertyType("headline")]
+		public string Headline => this.Value<string>("headline");
 
 		///<summary>
 		/// Rte
