@@ -128,13 +128,14 @@
         }
     }
     
-    $.fn.datepicker.defaults.format = "dd/mm";
+    //$.fn.datepicker.defaults.format = "dd/mm/yyyy";
     var date_input = $('.date');
     date_input.datepicker({
         todayHighlight: true,
         //autoclose: true,
-        startDate: '-3d'
-
+        startDate: '-3d',
+        //format: 'dd/mm/yyyy',
+        
         // Options:
         // https://bootstrap-datepicker.readthedocs.io/en/latest/
         // http://api.jqueryui.com/datepicker/#option-dateFormat
