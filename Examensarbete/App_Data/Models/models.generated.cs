@@ -19,7 +19,7 @@ using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "1efb0ce3463b7f5f")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "f93829479d07957")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 namespace Umbraco.Web.PublishedModels
@@ -102,6 +102,20 @@ namespace Umbraco.Web.PublishedModels
 		// properties
 
 		///<summary>
+		/// GridArea
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
+		[ImplementPropertyType("gridArea")]
+		public Newtonsoft.Json.Linq.JToken GridArea => this.Value<Newtonsoft.Json.Linq.JToken>("gridArea");
+
+		///<summary>
+		/// Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
+		[ImplementPropertyType("headline")]
+		public string Headline => this.Value<string>("headline");
+
+		///<summary>
 		/// Rte
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
@@ -142,11 +156,39 @@ namespace Umbraco.Web.PublishedModels
 		// properties
 
 		///<summary>
-		/// Name
+		/// blogImage
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
-		[ImplementPropertyType("blogPostName")]
-		public string BlogPostName => this.Value<string>("blogPostName");
+		[ImplementPropertyType("blogImage")]
+		public Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue BlogImage => this.Value<Umbraco.Core.PropertyEditors.ValueConverters.ImageCropperValue>("blogImage");
+
+		///<summary>
+		/// blogpostComment
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
+		[ImplementPropertyType("blogpostComment")]
+		public IEnumerable<string> BlogpostComment => this.Value<IEnumerable<string>>("blogpostComment");
+
+		///<summary>
+		/// BlogText
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
+		[ImplementPropertyType("blogText")]
+		public string BlogText => this.Value<string>("blogText");
+
+		///<summary>
+		/// Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
+		[ImplementPropertyType("headline")]
+		public string Headline => this.Value<string>("headline");
+
+		///<summary>
+		/// Subject
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder", "8.0.4")]
+		[ImplementPropertyType("subject")]
+		public string Subject => this.Value<string>("subject");
 	}
 
 	/// <summary>Blog Listing Page</summary>

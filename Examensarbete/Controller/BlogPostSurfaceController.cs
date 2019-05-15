@@ -31,8 +31,6 @@ namespace Examensarbete.Controller
         [HttpPost]
         public ActionResult Post(BlogPostViewModel model)
         {
-
-
             if (!ModelState.IsValid)
                 return CurrentUmbracoPage();
 
@@ -44,14 +42,6 @@ namespace Examensarbete.Controller
                 var request = _contentService.CreateAndSave(model.Subject, 1075, "BloggPage");
                 request.PublishName = model.Subject;
                 
-
-                //var curretPageGuid = CurrentPage.Key.ToString();
-                //var baseUdi = "umb://document/";
-                //var contentUdi = baseUdi + curretPageGuid;
-                //// Kan vara strul med SSL (Https / http)
-                //var result = _contentService.CreateContent("My content node", Udi.Parse(contentUdi), "contentPage");
-                //Services.ContentService.SaveAndPublish(result);
-
                 return RedirectToCurrentUmbracoPage();
             }
             catch (Exception e)

@@ -2,7 +2,6 @@
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<Examensarbete.Models.ViewModels.CalenderViewModel>
 
 <div class="row">
-
     <div class="col-sm-5">
         @using (Html.BeginUmbracoForm("BookDate", "CalenderSurface", FormMethod.Post))
         {
@@ -49,7 +48,7 @@
                         })
 
                 </div>
-                <small class="form-text text-muted">@TempData["ReturnDate"]</small>
+                <small class="form-text text-muted">@TempData["BokingMessage"]</small>
             </div>
 
             <div class="form-group">
@@ -71,8 +70,11 @@
 
         }
     </div>
+    
+</div>
+<div class="row">
 
-    <div class="col-sm-7">
+    <div class="col-sm-12">
         <table class="table table-dark table-active">
             <thead>
                 <tr>
@@ -91,8 +93,8 @@
                         <tr>
                             <td>@boking.Name</td>
                             <td>@boking.NumberOfPeople</td>
-                            <td>@boking.ArrivalDate.ToString("d")</td>
-                            <td>@boking.ReturnDate.ToString("d")</td>
+                            <td>@boking.ArrivalDate.ToString("dd MMMM")</td>
+                            <td>@boking.ReturnDate.ToString("dd MMM")</td>
 
                         </tr>
                     }

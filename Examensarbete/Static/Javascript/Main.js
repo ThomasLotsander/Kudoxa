@@ -95,35 +95,17 @@
 
 
     }
-
-    setInterval(function() {
-            GetWeather = true;
-
-        },
-        5000);
-
-    console.log(GetWeather);
-
-
-    // Updates weather every hour
-    //setInterval(function () {
-    //    $.getJSON('/umbraco/api/darkskyapi/get')
-    //        .done(function (data) {
-    //            console.log(data);
-    //            console.table("varje timme?");
-    //            console.table("mep: " + data.Icon);
-    //        });
-    //}, 3600000);
-
+    
+    $.fn.datepicker.defaults.format = "dd/mm";
     var date_input = $('.date');
     date_input.datepicker({
         todayHighlight: true,
         //autoclose: true,
-        dateFormat: 'dd/MM/yyyy',
         startDate: '-3d'
 
         // Options:
         // https://bootstrap-datepicker.readthedocs.io/en/latest/
         // http://api.jqueryui.com/datepicker/#option-dateFormat
     }).val();
+    
 });
