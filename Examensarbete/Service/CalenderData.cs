@@ -14,9 +14,9 @@ namespace Examensarbete.Service
             return _context.CalenderBokings.FirstOrDefault(m => m.Id == id);
         }
 
-        public List<CalenderBoking> GetCalenderBokings()
+        public List<CalenderBoking> GetUpToDateCalenderBokings()
         {
-            return _context.CalenderBokings.ToList();
+            return _context.CalenderBokings.Where(b => b.ReturnDate >= DateTime.Today).OrderBy(b => b.ArrivalDate).ToList();
         }
 
         public string SaveCalenderBoking(CalenderBoking boking)

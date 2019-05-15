@@ -1,26 +1,26 @@
 ﻿@using System.Web.UI.WebControls
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<Examensarbete.Models.ViewModels.CalenderViewModel>
 
-<div class="row">
+@using (Html.BeginUmbracoForm("BookDate", "CalenderSurface", FormMethod.Post, new { @class = "form-inline" }))
+{
+    @Html.HiddenFor(m => m.CalenderBokings, new { Value = @Model.CalenderBokings.Count })
+    @Html.AntiForgeryToken()
 
-    <div class="col-sm-5">
-        @using (Html.BeginUmbracoForm("BookDate", "CalenderSurface", FormMethod.Post))
-        {
-            @Html.ValidationSummary("all");
-            @Html.HiddenFor(m => m.CalenderBokings, new { Value = @Model.CalenderBokings.Count })
-            @Html.AntiForgeryToken()
-
+    if (TempData["BokingMassage"] != null)
+    {
+        <div class="alert alert-dark">
+            <small class="form-text text-muted">@TempData["BokingMessage"]</small>
+        </div>
+    }
+    <div class="row">
+        <div class="col-lg-3 col-md-12">
             <div class="form-group">
-                @Html.ValidationSummary()
-            </div>
 
-            <div class="form-group">
-                <div class="col-lg-3">
-                    @Html.LabelFor(m => m.ArrivalDate)
-                </div>
-                <div class="col-lg-9">
-                    @Html.EditorFor(m => m.ArrivalDate,
-                        new { htmlAttributes = new
+                @Html.LabelFor(m => m.ArrivalDate)
+                @Html.EditorFor(m => m.ArrivalDate,
+                    new
+                    {
+                        htmlAttributes = new
                         {
                             @class = "form-control date",
                             @id = "date",
@@ -28,17 +28,17 @@
                             onkeydown = "return false",
                             onpaste = "return false"
                         }
-                        })
-                </div>
+                    })
             </div>
+        </div>
 
+        <div class="col-lg-3 col-md-12">
             <div class="form-group">
-                <div class="col-lg-3">
-                    @Html.LabelFor(m => m.ReturnDate)
-                </div>
-                <div class="col-lg-9">
-                    @Html.EditorFor(m => m.ReturnDate,
-                        new { htmlAttributes = new
+                @Html.LabelFor(m => m.ReturnDate)
+                @Html.EditorFor(m => m.ReturnDate,
+                    new
+                    {
+                        htmlAttributes = new
                         {
                             @class = "form-control date",
                             @id = "date",
@@ -46,33 +46,37 @@
                             onkeydown = "return false",
                             onpaste = "return false"
                         }
-                        })
-
-                </div>
-                <small class="form-text text-muted">@TempData["ReturnDate"]</small>
+                    })
             </div>
+        </div>
 
+        <div class="col-lg-3 col-md-12">
             <div class="form-group">
-                <div class="col-lg-3">
-                    @Html.LabelFor(m => m.Name)
-                </div>
-                <div class="col-lg-9">
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                </div>
-                <div class="col-lg-3">
-                    @Html.LabelFor(m => m.NumberOfPeople)
-                </div>
-                <div class="col-lg-9">
-                    @Html.TextBoxFor(m => m.NumberOfPeople, new { type = "number", min = "1", @class = "form-control", onkeydown = "return false",
-                        onpaste = "return false" })
-                </div>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
             </div>
-            <input type="submit" class="btn btn-info" value="Spara" />
+        </div>
 
-        }
+        <div class="col-lg-3 col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(m => m.NumberOfPeople)
+                @Html.TextBoxFor(m => m.NumberOfPeople, new
+                {
+                    type = "number", min = "1", @class = "form-control", onkeydown = "return false",
+                    onpaste = "return false"
+                })
+
+                <input type="submit" class="btn btn-info" value="Spara" />
+            </div>
+        </div>
+
+
+
     </div>
+}
+<div class="row">
 
-    <div class="col-sm-7">
+    <div class="col-sm-12">
         <table class="table table-dark table-active">
             <thead>
                 <tr>
@@ -91,8 +95,8 @@
                         <tr>
                             <td>@boking.Name</td>
                             <td>@boking.NumberOfPeople</td>
-                            <td>@boking.ArrivalDate.ToString("d")</td>
-                            <td>@boking.ReturnDate.ToString("d")</td>
+                            <td>@boking.ArrivalDate.ToString("dd MMMM")</td>
+                            <td>@boking.ReturnDate.ToString("dd MMM")</td>
 
                         </tr>
                     }

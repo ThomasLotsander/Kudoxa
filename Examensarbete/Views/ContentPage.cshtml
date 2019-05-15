@@ -2,7 +2,14 @@
 @using Examensarbete.Models.ViewModels
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
-	Layout = "master.cshtml";
+    Layout = "master.cshtml";
 }
+
+@if (@Html.ValidationSummary() != null)
+{
+    <div class="alert alert-danger">@Html.ValidationSummary()</div>
+}
+
+
 <h2>@Model.Value("headline")</h2>
 @Model.Value("rte")

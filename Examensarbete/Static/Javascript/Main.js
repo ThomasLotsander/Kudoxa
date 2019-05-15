@@ -127,12 +127,12 @@
 
         }
     }
-
+    
+    $.fn.datepicker.defaults.format = "dd/mm";
     var date_input = $('.date');
     date_input.datepicker({
         todayHighlight: true,
         //autoclose: true,
-        dateFormat: 'dd/MM/yyyy',
         startDate: '-3d'
 
         // Options:

@@ -96,6 +96,8 @@ namespace Examensarbete.Controller
                 Console.WriteLine(e);
                 throw;
             }
+
+
         }
     }
 }

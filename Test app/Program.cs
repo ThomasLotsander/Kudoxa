@@ -11,7 +11,7 @@ namespace Test_app
     {
         static void Main(string[] args)
         {
-          
+
         }
     }
 }
