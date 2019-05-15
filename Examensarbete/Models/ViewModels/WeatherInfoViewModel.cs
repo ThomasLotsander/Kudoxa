@@ -13,5 +13,7 @@ namespace Examensarbete.Models.ViewModels
 
         public List<DailyWeatherforecastViewModel> DailyWeatherforecasts{ get; set; } = new List<DailyWeatherforecastViewModel>();
 
+        public List<HourlyWeatherForecastViewModel> HourlyWeather { get; set; } = new List<HourlyWeatherForecastViewModel>();
+
     }
 }

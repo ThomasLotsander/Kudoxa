@@ -10,6 +10,7 @@ using System.Web.Script.Serialization;
 using Examensarbete.Models.ApiModels.DarkskyModels;
 using Examensarbete.Models.ViewModels;
 using Examensarbete.Service;
+using Umbraco.Core;
 using Umbraco.Core.Models.Membership;
 using Umbraco.Web.WebApi;
 
@@ -30,11 +31,26 @@ namespace Examensarbete.Controller.ApiController
                 {
                     CurrentWeather = data.GetCurrentWeatherViewModel(result)
                 };
-                foreach (var date in result.daily.data)
+                foreach (var dailyData in result.daily.data)
                 {
-                    var dailyModel = data.GetDailyWeatherforecastViewModel(date);
+                    var dailyModel = data.GetDailyWeatherforecastViewModel(dailyData);
                     model.DailyWeatherforecasts.Add(dailyModel);
                 }
+
+                foreach (var hourlyData in result.hourly.data)
+                {
+                    // Api:et hämtar data för 24h framåt. Jag vill bara hämta för idag.
+                    DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+                    var currentDay = dt.AddSeconds(hourlyData.time).Day;
+                    var today = DateTime.Now.Day;
+                   
+                    if (today == currentDay)
+                    {
+                        var hourlyModel = data.GetHourlyWeatherViewModel(hourlyData);
+                        model.HourlyWeather.Add(hourlyModel);
+                    }
+                }
+
                 var jsonObject = new JavaScriptSerializer().Serialize(model);
                 return jsonObject;
             }

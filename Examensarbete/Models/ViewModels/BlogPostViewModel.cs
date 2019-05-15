@@ -25,9 +25,6 @@ namespace Examensarbete.Models.ViewModels
 
         [Display(Name = "Ladda upp en bild:")]
         public HttpPostedFileBase ImageFile { get; set; }
-        
-        
-
 
     }
 }

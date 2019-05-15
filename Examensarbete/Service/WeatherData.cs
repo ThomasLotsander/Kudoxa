@@ -60,7 +60,7 @@ namespace Examensarbete.Service
                     Icon = GetIconSerachString(current.icon),
                     CurrentHour = GetCurrentTime(model.offset, current.time).Hour
 
-            };
+                };
 
                 return viewModel;
             }
@@ -69,7 +69,7 @@ namespace Examensarbete.Service
                 Console.WriteLine(e);
                 throw;
             }
-          
+
         }
 
         public DailyWeatherforecastViewModel GetDailyWeatherforecastViewModel(Datum2 model)
@@ -90,6 +90,21 @@ namespace Examensarbete.Service
             return viewModel;
         }
 
+        public HourlyWeatherForecastViewModel GetHourlyWeatherViewModel(Datum model)
+        {
+            var viewModel = new HourlyWeatherForecastViewModel()
+            {
+                Hour = GetCurrentTime(2, (int)model.time).Hour.ToString(),
+                Icon = GetIconSerachString(model.icon),
+                Temp = Math.Round(model.temperature),
+                WindBearing = GetWindBearing((int)model.windBearing),
+                WindGust = Math.Round(model.windGust),
+                WindSpeed = Math.Round(model.windSpeed)
+            };
+
+            return viewModel;
+        }
+
         private DateTime GetCurrentTime(double hours, int time)
         {
             DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
@@ -97,10 +112,14 @@ namespace Examensarbete.Service
             return current;
         }
 
-        private string GetWindBearing(int windBearing)
+        private string GetWindBearing(int heading)
         {
-            string[] caridnals = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N" };
-            return caridnals[(int)Math.Round(((double)windBearing * 10 % 3600) / 225)];
+            var directions = new string[] {
+                "Nordlig", "Nordostlig ", "Östlig", "Sydostligos", "Sydlig", "Sydvästlig", "Västlig ", "Nordvästlig", "Nordlig"
+            };
+
+            var index = (heading + 23) / 45;
+            return directions[index] + " vind";
         }
 
         private string GetIconSerachString(string icon)

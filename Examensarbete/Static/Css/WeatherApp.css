@@ -10,3 +10,14 @@
 #weatherToggleBtn {
     width: inherit;
 }
+
+#myRow{
+    cursor: pointer;
+}
+
+.MyTestRow {
+    background-color: #343a40;
+}
+    .MyTestRow:hover {
+        background-color: #343a40 !important;
+    }
