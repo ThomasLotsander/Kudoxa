@@ -1,6 +1,7 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<Examensarbete.Models.ViewModels.BlogPostViewModel>
 
-@using (Html.BeginUmbracoForm("Post", "BlogPostSurface", FormMethod.Post))
+
+@using (Html.BeginUmbracoForm("Post", "BlogPostSurface", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -8,31 +9,24 @@
         @Html.ValidationSummary()
     </div>
 
+   
+
     <div class="form-group">
-        <div class="col-lg-3">
-            @Html.LabelFor(m => m.Subject)
-        </div>
-        <div class="col-lg-9">
-            @Html.TextBoxFor(m => m.Subject)
-        </div>
+        @Html.LabelFor(m => m.Headline)
+        @Html.TextBoxFor(m => m.Headline, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        <div class="col-lg-3">
-            @Html.LabelFor(m => m.Headline)
-        </div>
-        <div class="col-lg-9">
-            @Html.TextBoxFor(m => m.Headline)
-        </div>
+        <span class="input-group-addon">  @Html.LabelFor(m => m.Subject)</span>
+        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
-        <div class="col-lg-3">
-            @Html.LabelFor(m => m.Message)
-        </div>
-        <div class="col-lg-9">
-            @Html.TextAreaFor(m => m.Message)
-        </div>
+        @Html.LabelFor(m => m.Message)
+        @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <input type="file" name="imageFile" id="imageFile" />
     </div>
     <input type="submit" class="btn btn-primary" value="Skicka" />
 }

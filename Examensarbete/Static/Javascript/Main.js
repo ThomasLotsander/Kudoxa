@@ -1,27 +1,23 @@
 ﻿$(document).ready(function () {
     // Gets weather when page loads
-    var GetWeather = true;
-    if (GetWeather) {
-
-          $.getJSON('/umbraco/api/darkskyapi/get')
+   $.getJSON('/umbraco/api/darkskyapi/get')
         .done(function (data) {
             var obj = JSON.parse(data);
+          
             var current = obj.CurrentWeather;
             var forecast = obj.DailyWeatherforecasts;
-            console.log(obj);
-            console.log(current);
-            console.log(forecast);
+            var hourly = obj.HourlyWeather;
+
+            console.log(obj)
+            console.log(hourly)
 
             SetUpWeatherGadget(current);
-
-            GetWeather = false; 
             if (document.getElementById('forecastWeatherTable') !== null) {
-                SetupWeatherForecastTable(forecast);
-                GetWeather = true;
+                SetupWeatherForecastTable(obj);
             }
 
         });
-    }
+    
 
     function SetUpWeatherGadget(current) {
         document.getElementById("Temperature").innerText = current.Temperature + "°C";
@@ -38,10 +34,10 @@
         link.href = "/vader";
         link.innerHTML = "Se mer";
 
-        var windSpeedText = document.createTextNode(current.WindBearing + " " + current.WindSpeed + ":m/s " + "(" + current.WindGust + ")");
+        var windSpeedText = document.createTextNode(current.WindBearing + " " + current.WindSpeed + ":m/s");
         windSpeed.appendChild(windSpeedText);
 
-        var currentHourText = document.createTextNode(current.CurrentHour + ":00 ");
+        var currentHourText = document.createTextNode("Senaste mätningen: "+ current.CurrentHour + ":00 ");
         currentHour.appendChild(currentHourText);
 
         weatherGadget.appendChild(windSpeed);
@@ -49,15 +45,58 @@
         weatherGadget.appendChild(link);
     }
 
-    function SetupWeatherForecastTable(forecast) {
+
+    function SetupWeatherForecastTable(obj) {
+        var forecast = obj.DailyWeatherforecasts;
+        var hourly = obj.HourlyWeather;
 
         var tableRef = document.getElementById('forecastWeatherTable').getElementsByTagName('tbody')[0];
         for (var i = 0; i < forecast.length; i++) {
-            console.log(forecast[i].Day);
-            // Insert a row in the table at row index 0
+        
+          // Insert a row in the table at row index 0
             var newRow = tableRef.insertRow(tableRef.rows.length);
+            newRow.classList.add("dailyWeatherRow");
+            
 
-            //// Insert a cell in the row at index 0
+            if (i === 0) {
+                newRow.id = "myRow";
+                var rowHeader = tableRef.insertRow(tableRef.rows.length);
+                rowHeader.classList.add("MyTestRow");
+                var myTest = rowHeader.insertCell(0);
+                myTest.colSpan = 10;
+                for (var j = 0; j < hourly.length; j++) {
+
+                    var extraRow = tableRef.insertRow(tableRef.rows.length);
+                    var Hour = extraRow.insertCell(0);
+                    var HourImage = extraRow.insertCell(1);
+                    var HourTemp = extraRow.insertCell(2);
+                    var HourWindBearing = extraRow.insertCell(3);
+                    var HourWindSpeed = extraRow.insertCell(4);
+                    var HourWindGust = extraRow.insertCell(5);
+
+                    var HourlyIconImg = document.createElement("img");
+                    HourlyIconImg.src = hourly[j].Icon;
+                    HourlyIconImg.alt = hourly[j].Summary;
+                    HourlyIconImg.id = "weatherIcon";
+
+                    Hour.innerHTML = "Kl: " + hourly[j].Hour + ":00"; 
+                    HourImage.innerHTML = "";
+                    HourImage.appendChild(HourlyIconImg);
+                    HourTemp.innerHTML = "Temp: " + hourly[j].Temp + "°C";
+
+                    HourWindBearing.innerHTML = hourly[j].WindBearing;
+                    HourWindSpeed.innerHTML = hourly[j].WindSpeed + "m/s";
+                    HourWindGust.innerHTML = "(" + hourly[j].WindGust + "m/s)";
+                }
+
+                var rowFooter = tableRef.insertRow(tableRef.rows.length);
+                rowFooter.classList.add("MyTestRow");
+                var myTest2 = rowFooter.insertCell(0);
+                myTest2.colSpan = 10;
+
+            }
+
+            //// Insert a cell in the row at current index
             var Day = newRow.insertCell(0);
             var WeatherImage = newRow.insertCell(1);
             var MaxTemp = newRow.insertCell(2);
@@ -69,8 +108,6 @@
             var Sunrise = newRow.insertCell(8);
             var Sunset = newRow.insertCell(9);
 
-            //// Append a text node to the cell
-            ////var newText = document.createTextNode('New row')
             var iconImg = document.createElement("img");
             iconImg.src = forecast[i].Icon;
             iconImg.alt = forecast[i].Summary;
@@ -88,12 +125,7 @@
             Sunrise.innerHTML = forecast[i].Sunrise;
             Sunset.innerHTML = forecast[i].SunSet;
 
-            //newCell.appendChild(newText);
         }
-
-
-
-
     }
     
     $.fn.datepicker.defaults.format = "dd/mm";
@@ -107,5 +139,12 @@
         // https://bootstrap-datepicker.readthedocs.io/en/latest/
         // http://api.jqueryui.com/datepicker/#option-dateFormat
     }).val();
-    
+
+
+    $("#forecastWeatherTable").on('click', 'tr#myRow', function() {
+        $(this).nextUntil('tr.dailyWeatherRow').slideToggle();
+    });
 });
+
+
+

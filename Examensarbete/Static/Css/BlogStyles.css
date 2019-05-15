@@ -1,0 +1,31 @@
+﻿.blogPostArea {
+    padding: 2rem;
+    box-shadow: 1px 1px 4px;
+    position: relative;
+}
+
+.blogImage img {
+    border-radius: 50%;
+}
+
+
+.blogSubject {
+    position: absolute;
+    top: 0;
+}
+
+
+.blogCreateDate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+}
+
+.blogPageList {
+    list-style-type: none;
+}
+
+    .blogpageList li {
+        margin: 1rem;
+    }
