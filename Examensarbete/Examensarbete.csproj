@@ -605,6 +605,9 @@
     <Content Include="Static\Images\DarkskyApi\Thermometer\Thermometer.svg" />
     <Content Include="Static\Images\DarkskyApi\wind.svg" />
     <Content Include="Static\Images\DarkskyApi\Wind\Wind.svg" />
+    <Content Include="Static\Images\Kudoxa\Lillstugan.jpg" />
+    <Content Include="Static\Images\Kudoxa\Main.jpg" />
+    <Content Include="Static\Images\Kudoxa\vinter.jpg" />
     <Content Include="Static\Javascript\Main.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

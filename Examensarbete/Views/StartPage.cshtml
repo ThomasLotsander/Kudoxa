@@ -1,5 +1,57 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.StartPage>
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
-	Layout = "master.cshtml";
+    Layout = "master.cshtml";
 }
+
+@*<div class="bg-image"></div>*@
+<div class="container">
+    
+    <div id="demo" class="carousel slide m-2 " data-ride="carousel">
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img alt="" src="~/Static/Images/Kudoxa/Lillstugan.jpg" />
+                <div class="carousel-caption">
+                    <h3>Lillstugan</h3>
+                    <p>Stugan jag växte upp i som liten</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img alt="" src="~/Static/Images/Kudoxa/Main.jpg" />
+                <div class="carousel-caption">
+                    <h3>Härlig sommar</h3>
+                    <p>Tomten sett från bergen</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img alt="" src="~/Static/Images/Kudoxa/vinter.jpg" />
+                <div class="carousel-caption">
+                    <h3>Vintertid</h3>
+                    <p>Hur det kan se ut på vinten</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+
+    </div>
+
+    <div class="p-2 m-2">
+        @Html.GetGridHtml(Model, "mainGrid")
+    </div>
+</div>

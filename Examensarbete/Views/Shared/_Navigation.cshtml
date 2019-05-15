@@ -6,24 +6,33 @@
         .Where(x => x.IsVisible());
 }
 
-<div class="navbar navbar-expand-lg bg-light">
-    <ul class="navbar-nav">
-        <a class="navbar-brand" href="/">Kudoxa</a>
-        @foreach (var item in selection)
-        {
-            <li class="nav-item">
-                <a class="nav-link" href="@item.Url">@item.Name</a>
-            </li>
-        }
-    </ul>
+<nav class="navbar navbar-expand-md bg-t navbar-light fixed-top" id="mynavbar">
 
-    <div class="dropdown ml-auto" id="weatherGadget">
-        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="weatherToggleBtn">
-            <span id="Temperature"></span>
-            <img id="weatherIcon" alt="" src="" />
-            <span class="caret"></span>
-        </button>
-        <div id="weatherGadgetDiv" class="dropdown-menu"></div>
+    <a class="navbar-brand" href="/">Kudoxa</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav" >
+           @foreach (var item in selection)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="@item.Url">@item.Name</a>
+                </li>
+            }
+        </ul>
+
+        <div class="dropdown ml-auto nav-link" id="weatherGadget">
+            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="weatherToggleBtn">
+                <span id="Temperature"></span>
+                <img id="weatherIcon" alt="" src="" />
+                <span class="caret"></span>
+            </button>
+            <div id="weatherGadgetDiv" class="dropdown-menu"></div>
+        </div>
     </div>
 
-</div>
+</nav>
