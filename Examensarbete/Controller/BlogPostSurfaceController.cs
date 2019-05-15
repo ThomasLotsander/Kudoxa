@@ -45,11 +45,6 @@ namespace Examensarbete.Controller
                 blogContent.SetValue("subject", model.Subject, "en-US");
                 blogContent.SetValue("blogText", model.Message, "en-US");
 
-                var curretPageGuid = CurrentPage.Key;
-                var parentId = new Guid("3cce2545-e3ac-44ec-bf55-a52cc5965db3");
-                var request = _contentService.CreateAndSave(model.Subject, 1075, "BloggPage");
-                request.PublishName = model.Subject;
-                
                 if (model.ImageFile != null)
                 {
                     IMediaService mediaService = Services.MediaService;
