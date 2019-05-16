@@ -13,7 +13,7 @@
         </div>
     }
     <div class="row">
-        <div class="col-lg-3 col-md-12">
+        <div class="col-lg-3 ">
             <div class="form-group">
 
                 @Html.LabelFor(m => m.ArrivalDate)
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-12">
+        <div class="col-lg-3 ">
             <div class="form-group">
                 @Html.LabelFor(m => m.ReturnDate)
                 @Html.EditorFor(m => m.ReturnDate,
@@ -52,14 +52,14 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-12">
+        <div class="col-lg-3">
             <div class="form-group">
                 @Html.LabelFor(m => m.Name)
                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-12">
+        <div class="col-lg-3 ">
             <div class="form-group">
                 @Html.LabelFor(m => m.NumberOfPeople)
                 @Html.TextBoxFor(m => m.NumberOfPeople, new
@@ -72,11 +72,11 @@
                autocomplete = "off"
            })
 
-                <input type="submit" class="btn btn-info" value="Spara" />
+
             </div>
         </div>
 
-
+        <input type="submit" class="btn btn-info" value="Spara" />
 
     </div>
 }

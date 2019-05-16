@@ -48,11 +48,31 @@ namespace Examensarbete.Controller
                 if (model.ImageFile != null)
                 {
                     IMediaService mediaService = Services.MediaService;
-                    IMedia media = mediaService.CreateMedia(model.ImageFile.FileName, 1104, "Image");
-                    var resultAttempt = mediaService.Save(media);
-                    media.SetValue("umbracoFile", model.ImageFile); // Funkar inte som det ska. Kommer in en bild utan någon data
+                    IMedia media = mediaService.CreateMedia(model.ImageFile.FileName, 1160, "file");
+
+                    //var filename = Path.GetFileName(model.ImageFile.FileName);
+
+                    //System.Drawing.Image sourceimage =
+                    //    System.Drawing.Image.FromStream(model.ImageFile.InputStream);
+
+                    //media.SetValue("umbracoFile", sourceimage); // Funkar inte som det ska. Kommer in en bild utan någon data
+                    //media.SetValue("umbracoWidth", sourceimage.Width); // Funkar inte som det ska. Kommer in en bild utan någon data
+                    //media.SetValue("umbracoHeight", sourceimage.Height); // Funkar inte som det ska. Kommer in en bild utan någon data
+                    //media.SetValue("umbracoBytes", sourceimage.Size); // Funkar inte som det ska. Kommer in en bild utan någon data
+                    //media.SetValue("umbracoExtension", "jpg"); // Funkar inte som det ska. Kommer in en bild utan någon data
+
+                    //save as file
+                    
                     mediaService.Save(media);
-                    blogContent.SetValue("blogImage", media, "en-US");
+                    media.set
+                    media.SetValue("umbracoFile", model.ImageFile);
+                    mediaService.Save(media);
+
+
+
+
+
+                    mediaService.Save(media);
                 }
 
                 var result = _contentService.SaveAndPublish(blogContent, "en-US");

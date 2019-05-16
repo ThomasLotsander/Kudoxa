@@ -1,15 +1,15 @@
 ﻿$(document).ready(function () {
 
-    $(window).scroll(function () {
-        var scroll = $(window).scrollTop();
-        if (scroll < 70) {
-            $('.fixed-top').css('background', 'transparent');
-            $('.fixed-top').css('border-bottom', 'none');
-        } else {
-            $('.fixed-top').css('background', '#fff');
-            $('.fixed-top').css('border-bottom', '1px solid #0a501d');
-        }
-    });
+    //$(window).scroll(function () {
+    //    var scroll = $(window).scrollTop();
+    //    if (scroll < 70) {
+    //        $('.fixed-top').css('background', 'transparent');
+    //        $('.fixed-top').css('border-bottom', 'none');
+    //    } else {
+    //        $('.fixed-top').css('background', '#fff');
+    //        $('.fixed-top').css('border-bottom', '1px solid #0a501d');
+    //    }
+    //});
 
     // Gets weather when page loads
    $.getJSON('/umbraco/api/darkskyapi/get')
