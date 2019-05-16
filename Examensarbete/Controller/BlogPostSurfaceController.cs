@@ -64,7 +64,7 @@ namespace Examensarbete.Controller
                     //save as file
                     
                     mediaService.Save(media);
-                    media.set
+                    
                     media.SetValue("umbracoFile", model.ImageFile);
                     mediaService.Save(media);
 
