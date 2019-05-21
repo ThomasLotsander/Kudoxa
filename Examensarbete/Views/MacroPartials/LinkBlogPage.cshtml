@@ -1,0 +1,52 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+
+@{
+    //var heading = Model.MacroParameters["Heading"] as string;
+    //var text = Model.MacroParameters["Text"] as string;
+    var node = Umbraco.Content(Model.MacroParameters["TargetContent"]);
+
+    //var widget = Umbraco.Content(Udi.Parse(Model.MacroParameters["TargetContent"].ToString()));
+    //var headline2 = widget.GetProperty("headLine");
+
+    var headline = node.HasProperty("headLine") ? node.Value("headLine") : null;
+    var blogText = node.HasProperty("blogText") ? node.Value("blogText") : null;
+    var image = node.HasProperty("blogImage") ? node.Value("blogImage") : null;
+    //var listImage = node.HasProperty("ListingImage") ? node.GetProperty("ListingImage") : null;
+    //var imageUrl = image != null ? MmmxUrlHelper.GetAbsoluteMediaUrlById(image.DataValue.ToString()) : string.Empty;
+    //var listingImageUrl = listImage != null ? MmmxUrlHelper.GetAbsoluteMediaUrlById(listImage.DataValue.ToString()) : string.Empty;
+}
+
+
+<a href="@node.Url" class="card card-in-article" id="blog-link">
+
+   
+        <div class="img-wrapper img-wrapper-card-img-top">
+            <img id="blog-image" class="card-img-top" src="@image" alt="Discount card image">
+        </div>
+   
+    <div class="card-body">
+        
+        <h2 class="card-title">@headline</h2>
+        <p class="card-in-article" id="card-article">@blogText</p>
+        @*<img id="blog-image" src="@image"/>*@
+ 
+    </div>
+</a>
+
+<style>
+    #card-article {
+        height: 5rem;
+        line-height: 20px;
+        overflow: hidden;
+    }
+    #blog-image {
+        max-height: 10rem;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #blog-link{
+        min-height: 20rem;
+    }
+</style>

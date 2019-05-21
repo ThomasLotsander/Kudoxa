@@ -18,7 +18,16 @@
         <div class="col-lg-3">
 
             <div class="blogImage">
-                <img src="@Model.Value("blogImage")" />
+                @if (Model.Value("blogImage") == null)
+                {
+
+                    <img src="~/Static/Images/Kudoxa/Main.jpg" alt="Default bild"/>
+                }
+                else
+                {
+                    <img src="@Model.Value("blogImage")" alt="" />
+                }
+
             </div>
         </div>
 
@@ -45,7 +54,7 @@
 
 
             @using (Html.BeginUmbracoForm("AddComment", "BlogPostSurface", FormMethod.Post))
-            { 
+            {
                 <div class="input-group">
                     <input class="form-control" placeholder="Skriv en kommenta..." name="Comment" />
                     <span class="input-group-addon"> <input type="submit" class="btn btn-primary" value="skicka" /></span>

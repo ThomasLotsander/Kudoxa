@@ -25,7 +25,7 @@ namespace Examensarbete.Models.ViewModels
         public int NumberOfPeople { get; set; }
 
         [Required(ErrorMessage = "Vänligen skriv in ditt namn")]
-        [Display(Name = "Namn")]
+        [Display(Name = "Ditt namn")]
         public string Name { get; set; }
 
         public List<CalenderBoking> CalenderBokings { get; set; }

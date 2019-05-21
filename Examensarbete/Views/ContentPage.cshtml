@@ -3,6 +3,7 @@
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
     Layout = "subMaster.cshtml";
+
 }
 
 @if (@Html.ValidationSummary() != null)
@@ -13,4 +14,7 @@
 
 <h2>@Model.Value("headline")</h2>
 @Model.Value("rte")
+
+
+@*<p>@test2</p>*@
 @Html.GetGridHtml(Model, "gridArea")
