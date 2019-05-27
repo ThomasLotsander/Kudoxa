@@ -4,11 +4,6 @@
     position: relative;
 }
 
-.blogImage img {
-    max-width: 100%;
-    max-height: 100%;
-}
-
 
 .blogSubject {
     position: absolute;
@@ -23,10 +18,37 @@
     margin: 1rem;
 }
 
-.blogPageList {
-    list-style-type: none;
+.blogListItem{
+    box-shadow: 1px 1px 1px;
 }
 
-    .blogpageList li {
-        margin: 1rem;
-    }
+#blogImg {
+    max-height: 12rem;
+    width: 21rem;
+    min-width: 21rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.blogImage img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+#card-text{
+    height: 6rem;
+    line-height: 20px;
+    overflow: hidden;
+}
+
+#blogListContainer{
+    width: 80%;
+    margin: auto;
+        
+}
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}

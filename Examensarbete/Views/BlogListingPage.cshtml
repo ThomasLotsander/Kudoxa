@@ -3,33 +3,66 @@
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
     Layout = "subMaster.cshtml";
+    var loginStatusModel = Members.GetCurrentLoginStatus();
 }
 
 @{
     var selection = Umbraco.Content(1075)
         .Children()
-        .Where(x => x.IsVisible());
+        .Where(x => x.IsVisible())
+        .OrderByDescending(x => x.CreateDate);
 }
 
 
-    <div class="row">
-        <div class="col-lg-4 p-2">
-            <ul class="blogPageList">
-                @foreach (var item in selection)
-                {
-                <li>
-                   
-                    <a href="@item.Url"> <img id="weatherIcon" src="~/Static/Images/DarkskyApi/clear-day.svg" /> @item.Name</a>
-                </li>
-                }
-            </ul>
+
+
+<div class="container-fluid">
+
+    <div id="blogListContainer">
+        <div class="row">
+        
+            <div class="col-lg-12">
+                <strong>@TempData["PublishFaild"]</strong>
+                <h3 class="pull-left">Läs de senaste blogginläggen</h3>
+              
+                <span class="pull-right">@Html.Action("Index", "BlogPostSurface")</span>
+              
+                
+            </div>
         </div>
-        <div class="col-lg-8 p-2">
-            <strong>@TempData["PublishFaild"]</strong>
-            @Html.Action("Index", "BlogPostSurface")
-        </div>
+
+
+        @foreach (var item in selection)
+        {
+
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="card">
+                        <div class="card-horizontal">
+                            <div class="img-square-wrapper">
+                                @if (item.Value("blogImage") == null)
+                                {
+                                    <img id="blogImg" src="~/Static/Images/Kudoxa/Main.jpg" alt=""/>
+                                }
+                                else
+                                {
+                                    <img id="blogImg" src="@item.Value("blogImage")" alt="Blog image">
+                                }
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title"><a href="@item.Url">@item.Name</a></h2>
+                                <p class="card-text" id="card-text">@item.Value("blogText")</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted pull-right">Skrevs @item.CreateDate.ToString("dd MMM yyyy")</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 
-
+</div>
 
 

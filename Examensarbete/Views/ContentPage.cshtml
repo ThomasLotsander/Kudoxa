@@ -3,7 +3,7 @@
 @using ContentModels = Umbraco.Web.PublishedModels;
 @{
     Layout = "subMaster.cshtml";
-
+    var loginStatusModel = Members.GetCurrentLoginStatus();
 }
 
 @if (@Html.ValidationSummary() != null)
@@ -18,3 +18,4 @@
 
 @*<p>@test2</p>*@
 @Html.GetGridHtml(Model, "gridArea")
+

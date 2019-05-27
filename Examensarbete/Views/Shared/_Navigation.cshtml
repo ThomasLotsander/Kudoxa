@@ -1,6 +1,12 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using System.Web.Mvc.Html
+@using Umbraco.Web
+@using Umbraco.Web.Models
+@using Umbraco.Web.Controllers
 
 @{
+    var loginStatusModel = Members.GetCurrentLoginStatus();
+    var logoutModel = new PostRedirectModel();
     var selection = Umbraco.ContentAtRoot().FirstOrDefault()
         .Children()
         .Where(x => x.IsVisible());
@@ -16,16 +22,40 @@
     </button>
 
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav" >
-           @foreach (var item in selection)
+        <ul class="navbar-nav">
+            @foreach (var item in selection)
             {
                 <li class="nav-item">
                     <a class="nav-link" href="@item.Url">@item.Name</a>
                 </li>
             }
         </ul>
+        <ul class="navbar-nav ml-auto">
+            @if (loginStatusModel.IsLoggedIn)
+            {  <li class="nav-item">
+        
+               </li>
+                using (Html.BeginUmbracoForm<UmbLoginStatusController>("HandleLogout"))
+                {
+                    <fieldset>
+                        
+                        <button class="btn">logga ut som @loginStatusModel.Name</button>
+                    </fieldset>
 
-        <div class="dropdown ml-auto nav-link" id="weatherGadget">
+                    @Html.HiddenFor(m => logoutModel.RedirectUrl)
+                }
+               
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a href="/login">Logga in</a>
+                </li>
+            }
+
+        </ul>
+        <div class="dropdown nav-link" id="weatherGadget">
+
             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" id="weatherToggleBtn">
                 <span id="Temperature"></span>
                 <img id="weatherIcon" alt="" src="" />

@@ -2,6 +2,17 @@
 @{
     Layout = null;
 }
+@{
+    var loginStatusModel = Members.GetCurrentLoginStatus();
+
+    @*
+        Here you can specify a redirect URL for after logging out, by default umbraco will simply
+        redirect to the current page. Example to redirect to the home page:
+
+        logoutModel.RedirectUrl = "/";
+    *@
+}
+
 
 @* the fun starts here *@
 <html>
@@ -21,7 +32,6 @@
 </head>
 <body>
     @Html.Partial("_Navigation")
-   
         <div>
             @RenderBody()
         </div>
@@ -34,6 +44,7 @@
     <script src="~/Static/Javascript/Main.js"></script>
     <!-- Include Date Range Picker -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+   
     @*
         Dark Sky Weather API icons by Dr. Lex aka Alexander Thomas
         http://www.dr-lex.be/software/darksky-icons.html

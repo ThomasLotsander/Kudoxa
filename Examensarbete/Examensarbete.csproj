@@ -745,6 +745,11 @@
     <Content Include="Views\Partials\Grid\Bootstrap3-Fluid.cshtml" />
     <Content Include="Views\MacroPartials\LinkBlogPage.cshtml" />
     <Content Include="Views\subMaster.cshtml" />
+    <Content Include="Views\Partials\login status.cshtml" />
+    <Content Include="Views\Partials\Login.cshtml" />
+    <Content Include="Views\Partials\Register.cshtml" />
+    <Content Include="Views\login.cshtml" />
+    <Content Include="Views\register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

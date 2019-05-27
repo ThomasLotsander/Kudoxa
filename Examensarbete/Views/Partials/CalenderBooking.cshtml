@@ -1,85 +1,101 @@
 ﻿@using System.Web.UI.WebControls
+@using Umbraco.Web.Models
 @inherits Umbraco.Web.Mvc.UmbracoViewPage<Examensarbete.Models.ViewModels.CalenderViewModel>
-
-@using (Html.BeginUmbracoForm("BookDate", "CalenderSurface", FormMethod.Post, new { @class = "form-inline" }))
-{
-    @Html.HiddenFor(m => m.CalenderBokings, new { Value = @Model.CalenderBokings.Count })
-    @Html.AntiForgeryToken()
-
-    if (TempData["BokingMassage"] != null)
-    {
-        <div class="alert alert-dark">
-            <small class="form-text text-muted">@TempData["BokingMessage"]</small>
-        </div>
-    }
-    <div class="row">
-        <div class="col-lg-3 ">
-            <div class="form-group">
-
-                @Html.LabelFor(m => m.ArrivalDate)
-                @Html.EditorFor(m => m.ArrivalDate,
-                    new
-                    {
-                        htmlAttributes = new
-                        {
-                            @class = "form-control date",
-                            @id = "date",
-                            @Name = "ArrivalDate",
-                            onkeydown = "return false",
-                            onpaste = "return false",
-                            autocomplete = "off"
-                        }
-                    })
-            </div>
-        </div>
-
-        <div class="col-lg-3 ">
-            <div class="form-group">
-                @Html.LabelFor(m => m.ReturnDate)
-                @Html.EditorFor(m => m.ReturnDate,
-                    new
-                    {
-                        htmlAttributes = new
-                        {
-                            @class = "form-control date",
-                            @id = "date",
-                            @Name = "ReturnDate",
-                            onkeydown = "return false",
-                            onpaste = "return false",
-                            autocomplete = "off"
-                        }
-                    })
-            </div>
-        </div>
-
-        <div class="col-lg-3">
-            <div class="form-group">
-                @Html.LabelFor(m => m.Name)
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="col-lg-3 ">
-            <div class="form-group">
-                @Html.LabelFor(m => m.NumberOfPeople)
-                @Html.TextBoxFor(m => m.NumberOfPeople, new
-           {
-               type = "number",
-               min = "1",
-               @class = "form-control",
-               onkeydown = "return false",
-               onpaste = "return false",
-               autocomplete = "off",
-           })
-
-
-            </div>
-        </div>
-
-        <input type="submit" class="btn btn-info" value="Spara" />
-
-    </div>
+@{
+    var loginStatusModel = Members.GetCurrentLoginStatus();
 }
+
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginUmbracoForm("BookDate", "CalenderSurface", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => m.CalenderBokings, new { Value = @Model.CalenderBokings.Count })
+                @Html.HiddenFor(m => m.Name, new { Value = @loginStatusModel.Name })
+                @Html.AntiForgeryToken()
+
+                if (TempData["BokingMassage"] != null)
+                {
+                    <div class="alert alert-dark">
+                        <small class="form-text text-muted">@TempData["BokingMessage"]</small>
+                    </div>
+                }
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Boka resa till Kudoxa som @loginStatusModel.Name</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+             
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ArrivalDate)
+                        @Html.EditorFor(m => m.ArrivalDate,
+                            new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control date",
+                                    @id = "date",
+                                    @Name = "ArrivalDate",
+                                    onkeydown = "return false",
+                                    onpaste = "return false",
+                                    autocomplete = "off"
+                                }
+                            })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ReturnDate)
+                        @Html.EditorFor(m => m.ReturnDate,
+                            new
+                            {
+                                htmlAttributes = new
+                                {
+                                    @class = "form-control date",
+                                    @id = "date",
+                                    @Name = "ReturnDate",
+                                    onkeydown = "return false",
+                                    onpaste = "return false",
+                                    autocomplete = "off"
+                                }
+                            })
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NumberOfPeople)
+                        @Html.TextBoxFor(m => m.NumberOfPeople, new
+                   {
+                       type = "number",
+                       min = "1",
+                       @class = "form-control",
+                       onkeydown = "return false",
+                       onpaste = "return false",
+                       autocomplete = "off",
+                   })
+                    </div>
+
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-info" value="Spara" />
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@*Tabell med alla bokningar*@
 <div class="row">
 
     <div class="col-sm-12">
@@ -117,3 +133,16 @@
         </table>
     </div>
 </div>
+<!-- Button to Open the Modal -->
+@if (loginStatusModel.IsLoggedIn)
+{
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+        Boka resa
+    </button>
+}
+else
+{
+    <a href="/login/" class="btn btn-primary" >
+        Logga in för att boka resa
+    </a>
+}
